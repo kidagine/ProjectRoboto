@@ -21,6 +21,7 @@ TagManager:
   - TransitionUp
   - EnemyChecker
   - VcVertical
+  - CutsceneTrigger
   layers:
   - Default
   - TransparentFX

@@ -54,17 +54,11 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\EnemyCheckCameraNonVc.cs" />
-     <Compile Include="Assets\EZ Camera Shake\Demo\Sample Scripts\ShakeByDistance.cs" />
-     <Compile Include="Assets\EZ Camera Shake\Demo\Sample Scripts\ShakeOnKeyPress.cs" />
-     <Compile Include="Assets\EZ Camera Shake\Demo\Sample Scripts\ShakeOnTrigger.cs" />
-     <Compile Include="Assets\EZ Camera Shake\Demo\ShakeDemo.cs" />
-     <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakeInstance.cs" />
-     <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakePresets.cs" />
-     <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShaker.cs" />
-     <Compile Include="Assets\EZ Camera Shake\Scripts\Utilities\CameraUtilities.cs" />
      <Compile Include="Assets\GameObjHolder.cs" />
+     <Compile Include="Assets\GameOver.cs" />
      <Compile Include="Assets\KillPlayerHead.cs" />
      <Compile Include="Assets\NonVCMove.cs" />
+     <Compile Include="Assets\PauseMenu.cs" />
      <Compile Include="Assets\PlatformCheckCameraNonVc.cs" />
      <Compile Include="Assets\Scripts\BackgroundScripts\BackgroundRepeating.cs" />
      <Compile Include="Assets\Scripts\BackgroundScripts\BackgroundScroling.cs" />
@@ -99,6 +93,8 @@
      <Compile Include="Assets\Scripts\GameMaster.cs" />
      <Compile Include="Assets\Scripts\GameMasterMain.cs" />
      <Compile Include="Assets\Scripts\MainMenu.cs" />
+     <Compile Include="Assets\Scripts\ManagerScripts\AudioManager.cs" />
+     <Compile Include="Assets\Scripts\ManagerScripts\Sounds.cs" />
      <Compile Include="Assets\Scripts\MenuScripts\audioTxt.cs" />
      <Compile Include="Assets\Scripts\MenuScripts\fullscreenTxt.cs" />
      <Compile Include="Assets\Scripts\MenuScripts\musicTxt.cs" />
@@ -158,28 +154,28 @@
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
  <Reference Include="Cinemachine">
- <HintPath>C:/Users/Kid Agine/Desktop/Homunculus/2D-Movement-master/homunculus/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/Other/Homunculus/2D-Movement-master/homunculus/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.PixelPerfect.Editor">
- <HintPath>C:/Users/Kid Agine/Desktop/Homunculus/2D-Movement-master/homunculus/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/Other/Homunculus/2D-Movement-master/homunculus/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.StandardEvents">
- <HintPath>C:/Users/Kid Agine/Desktop/Homunculus/2D-Movement-master/homunculus/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/Other/Homunculus/2D-Movement-master/homunculus/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>C:/Users/Kid Agine/Desktop/Homunculus/2D-Movement-master/homunculus/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/Other/Homunculus/2D-Movement-master/homunculus/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>C:/Users/Kid Agine/Desktop/Homunculus/2D-Movement-master/homunculus/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/Other/Homunculus/2D-Movement-master/homunculus/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.PixelPerfect">
- <HintPath>C:/Users/Kid Agine/Desktop/Homunculus/2D-Movement-master/homunculus/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/Other/Homunculus/2D-Movement-master/homunculus/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
  </Reference>
  <Reference Include="com.unity.cinemachine.editor">
- <HintPath>C:/Users/Kid Agine/Desktop/Homunculus/2D-Movement-master/homunculus/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/Other/Homunculus/2D-Movement-master/homunculus/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>C:/Users/Kid Agine/Desktop/Homunculus/2D-Movement-master/homunculus/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>C:/Users/Kid Agine/Desktop/Other/Homunculus/2D-Movement-master/homunculus/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>D:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -409,6 +405,10 @@
  <Reference Include="Boo.Lang">
  <HintPath>D:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unity/Boo.Lang.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{6540BFB9-1654-2486-D330-3DB6C8815338}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

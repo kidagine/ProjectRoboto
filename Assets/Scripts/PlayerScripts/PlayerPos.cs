@@ -6,31 +6,25 @@ using UnityEngine.SceneManagement;
 public class PlayerPos : MonoBehaviour
 {
 
-    private GameMasterMain gm;
+
+	public static bool IsPlayerDead = false;
+
+	private GameMasterMain gm;
 
     public int attackDamage = 1000;
     public GameObject die;
     public float fallDelay = 1.5f;
-    public static bool playerDeath;
-    Rigidbody2D rdd;
-    public GameObject skeleton;
-    public GameObject homunculus;
+	public GameObject prefabDeath;
     GameObject player;
     GameObject playerHead;
     PlayerHealth playerHealth;
-    Animator anim;
-    public Animator transitionAnim;
     private bool death;
 	private Collider2D playerCollider;
 
     private void Awake()
     {
-        skeleton.SetActive(false);
-        homunculus.SetActive(false);
-        rdd = GetComponent<Rigidbody2D>();
         playerHead = GameObject.FindGameObjectWithTag("Player");
 		playerCollider = GetComponent<Collider2D>();
-        anim = GetComponent<Animator>();
     }
 
     void Start()
@@ -52,37 +46,9 @@ public class PlayerPos : MonoBehaviour
 
 	public void isDead()
 	{
-		anim.SetBool("Death", true);
-		death = true;
-		playerCollider.enabled = false;
-		StartCoroutine(Fall());
-		StartCoroutine(LoadScene());
+		Instantiate(prefabDeath, transform.position, transform.rotation);
+		Destroy(gameObject);
+		IsPlayerDead = true;
 	}
 
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (death == true)
-        {
-            GetComponent<PlayerMovement>().enabled = false;
-            GetComponent<CharacterController2D>().enabled = false;
-            rdd.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezePositionX;
-		}
-    }
-	IEnumerator Fall()
-	{
-		yield return new WaitForSeconds(fallDelay);
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-		yield return 0;
-	}
-	IEnumerator LoadScene()
-    {
-        yield return new WaitForSeconds(1);
-        transitionAnim.SetTrigger("end");
-        yield return new WaitForSeconds(1);
-        skeleton.SetActive(true);
-        homunculus.SetActive(true);
-        yield return new WaitForSeconds(2.5f);
-    }
 }

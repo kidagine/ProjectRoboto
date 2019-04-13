@@ -24,7 +24,6 @@ public class EnemyCheckCamera : MonoBehaviour {
 	private void EnemyCreate()
 	{
 		Instantiate(enemyToCreate, transform.position, Quaternion.identity);
-		Debug.Log(isCreated);
 		isCreated = true;
 	}
 	void OnTriggerExit2D(Collider2D other)

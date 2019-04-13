@@ -12,6 +12,7 @@ public class DialogueManager : MonoBehaviour {
 	public AudioSource typingSound;
 	public Animator animator;
 	public GameObject arrow;
+	public StartDialogue startDialogue;
 
 	private Queue<string> sentences;
 
@@ -22,7 +23,7 @@ public class DialogueManager : MonoBehaviour {
     public void Update()
     {
 
-		if (Input.GetButtonDown("Fire2") && sentenceFinished == true)
+		if ( Input.GetKey(KeyCode.J) && sentenceFinished == true)
         {
             DisplayNextSentence();
 			sentenceFinished = false;
@@ -32,7 +33,6 @@ public class DialogueManager : MonoBehaviour {
 	public void StartDialogue (Dialogue dialogue)
 	{
 		animator.SetBool("IsOpen", true);
-
 		nameText.text = dialogue.name;
 
 		sentences.Clear();
@@ -69,13 +69,13 @@ public class DialogueManager : MonoBehaviour {
 			dialogueText.text += letter;
 			yield return null;
 		}
-		Debug.Log("done");
 		sentenceFinished = true;
 		arrow.SetActive(true);
 	}
 
 	void EndDialogue()
 	{
+		PlayerMovementBasic.isDialogueActive = false;
 		animator.SetBool("IsOpen", false);
 	}
 

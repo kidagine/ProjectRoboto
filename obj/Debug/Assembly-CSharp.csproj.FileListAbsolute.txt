@@ -513,3 +513,4 @@ C:\Users\Kid Agine\Desktop\Homunculus\2D-Movement-master\homunculus\obj\Debug\As
 C:\Users\Kid Agine\Desktop\Homunculus\2D-Movement-master\homunculus\obj\Debug\Assembly-CSharp.pdb
 C:\Users\Kid Agine\Desktop\Homunculus\2D-Movement-master\homunculus\Temp\bin\Debug\Unity.2D.PixelPerfect.dll
 C:\Users\Kid Agine\Desktop\Homunculus\2D-Movement-master\homunculus\Temp\bin\Debug\Unity.2D.PixelPerfect.Editor.dll
+C:\Users\Kid Agine\Desktop\Homunculus\2D-Movement-master\homunculus\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb

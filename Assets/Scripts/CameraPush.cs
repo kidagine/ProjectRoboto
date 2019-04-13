@@ -6,9 +6,10 @@ public class CameraPush : MonoBehaviour {
     private bool moveVertical = true;
 	private bool moveHorizontal = true;
 	private float distanceHorizontal = 25.3f;
-	private float distanceVertical = 16.3f;
-    private float time = 5f;
-
+	private float distanceVertical = 10.3f;
+    private float timeHorizontal = 1f;
+	private float timeVertical = 1.5f;
+	private float timez = 0f;
     // Update is called once per frame
     void FixedUpdate() {
 		//Right
@@ -16,14 +17,14 @@ public class CameraPush : MonoBehaviour {
         {
 			PlayerCameraManager.VC = false;
 			PlayerCameraManager.VcVertical = false;
-			transform.Translate(Vector3.left * Time.deltaTime * distanceHorizontal);
+			transform.Translate(Vector3.left * Time.deltaTime * 1.5f * distanceHorizontal);
             StartCoroutine(TransitionHorizontal());
         }
         else if (PlayerCameraManager.transition && moveHorizontal == false)
         {
 			PlayerCameraManager.VC = false;
 			PlayerCameraManager.VcVertical = false;
-			transform.Translate(Vector3.right * Time.deltaTime * distanceHorizontal);
+			transform.Translate(Vector3.right * Time.deltaTime * 1.5f * distanceHorizontal);
             StartCoroutine(TransitionHorizontal2());
         }
 		//Left
@@ -31,14 +32,14 @@ public class CameraPush : MonoBehaviour {
         {
 			PlayerCameraManager.VC = false;
 			PlayerCameraManager.VcVertical = false;
-			transform.Translate(Vector3.right * Time.deltaTime * distanceHorizontal);
+			transform.Translate(Vector3.right * Time.deltaTime * 1.5f * distanceHorizontal);
             StartCoroutine(TransitionHorizontal());
         }
         else if (PlayerCameraManager.transitionLeft && moveHorizontal == false)
         {
 			PlayerCameraManager.VC = false;
 			PlayerCameraManager.VcVertical = false;
-			transform.Translate(Vector3.left * Time.deltaTime * distanceHorizontal);
+			transform.Translate(Vector3.left * Time.deltaTime * 1.5f * distanceHorizontal);
             StartCoroutine(TransitionHorizontal2());
         }
 		//Up
@@ -46,14 +47,14 @@ public class CameraPush : MonoBehaviour {
 		{
 			PlayerCameraManager.VC = false;
 			PlayerCameraManager.VcVertical = false;
-			transform.Translate(Vector3.down * Time.deltaTime * distanceVertical);
+			transform.Translate(Vector3.down * Time.deltaTime * 1.8f * distanceVertical);
 			StartCoroutine(TransitionVertical());
 		}
 		else if (PlayerCameraManager.transitionUp && moveVertical == false)
 		{
 			PlayerCameraManager.VC = false;
 			PlayerCameraManager.VcVertical = false;
-			transform.Translate(Vector3.up * Time.deltaTime * distanceVertical);
+			transform.Translate(Vector3.up * Time.deltaTime * 1.8f * distanceVertical);
 			StartCoroutine(TransitionVertical2());
 		}
 		//Down
@@ -61,43 +62,39 @@ public class CameraPush : MonoBehaviour {
 		{
 			PlayerCameraManager.VC = false;
 			PlayerCameraManager.VcVertical = false;
-			transform.Translate(Vector3.up * Time.deltaTime * distanceVertical);
+			transform.Translate(Vector3.up * Time.deltaTime * 1.8f * distanceVertical);
 			StartCoroutine(TransitionVertical());
 		}
 		else if (PlayerCameraManager.transitionDown && moveVertical == false)
 		{
 			PlayerCameraManager.VC = false;
 			PlayerCameraManager.VcVertical = false;
-			transform.Translate(Vector3.down * Time.deltaTime * distanceVertical);
+			transform.Translate(Vector3.down * Time.deltaTime * 1.8f * distanceVertical);
 			StartCoroutine(TransitionVertical2());
 		}
 	}
     IEnumerator TransitionVertical()
     {
-        yield return new WaitForSeconds(time);
-		Debug.Log("ready");
+        yield return new WaitForSeconds(timeVertical);
 		moveVertical = false;
         yield return 0;
     }
     IEnumerator TransitionVertical2()
     {
-        yield return new WaitForSeconds(time);
-		Debug.Log("ready");
+        yield return new WaitForSeconds(timeVertical);
 		moveVertical = true;
         yield return 0;
     }
 
 	IEnumerator TransitionHorizontal()
 	{
-		yield return new WaitForSeconds(time);
-		Debug.Log("ready");
+		yield return new WaitForSeconds(timeHorizontal);
 		moveHorizontal = false;
 		yield return 0;
 	}
 	IEnumerator TransitionHorizontal2()
 	{
-		yield return new WaitForSeconds(time);
-		Debug.Log("ready");
+		yield return new WaitForSeconds(timeHorizontal);
 		moveHorizontal = true;
 		yield return 0;
 	}

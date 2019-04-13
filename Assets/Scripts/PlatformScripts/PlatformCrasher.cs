@@ -10,7 +10,6 @@ public class PlatformCrasher : MonoBehaviour {
 	private bool checkPlayer = false;
 	private bool restorePos = false;
 
-	public PlayerPos playerPos;
 	// Use this for initialization
 	void Start()
 	{
@@ -20,9 +19,6 @@ public class PlatformCrasher : MonoBehaviour {
 	{
 		if (other.gameObject.tag != "VC" && gameObject.transform.position == originalPos)
 		{
-			Debug.Log(other);
-			Debug.Log("error2");
-			Debug.Log(checkPlayer);
 			checkPlayer = true;
 		}
 	}
@@ -31,13 +27,12 @@ public class PlatformCrasher : MonoBehaviour {
 	{
 		if (other.gameObject.CompareTag("VC"))
 		{
-			Debug.Log("eoororo");
 			restorePos = true;
 			checkPlayer = false;
 		}
 		else if (other.gameObject.CompareTag("Enemy"))
 		{
-			other.gameObject.GetComponent<Enemy>().KillEnemy();
+			other.gameObject.GetComponent<EnemyNonVc>().KillEnemy();
 		}
 		else
 		{

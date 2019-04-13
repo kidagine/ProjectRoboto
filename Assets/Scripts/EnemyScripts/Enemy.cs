@@ -72,7 +72,8 @@ public class Enemy : MonoBehaviour {
     }
     public void Hurt()
     {
-        Destroy(gameObject);
+
+		Destroy(gameObject);
     }
 	public void KillEnemy()
 	{

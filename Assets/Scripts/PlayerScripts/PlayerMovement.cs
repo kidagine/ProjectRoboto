@@ -9,7 +9,7 @@ public class PlayerMovement : PlayerMovementBasic {
     public Animator animator;
     public GameObject boarder;
 
-    public float runSpeed = 1f;
+  
     public float verticalVelocity = 5f;
 
     static public float runSpeedHidden;
@@ -23,6 +23,7 @@ public class PlayerMovement : PlayerMovementBasic {
     private  bool crouch = false;
     private bool powerOne = false;
     private bool fallingDamage = false;
+	private float gravity;
 
     PlayerMovement playerMovement;
     CharacterController2D charactercontroller;
@@ -30,16 +31,69 @@ public class PlayerMovement : PlayerMovementBasic {
     // Update is called once per frame
     void Start()
     {
+	
         runSpeedHidden = runSpeed;
         rdd = GetComponent<Rigidbody2D>();
-    }
- 
-    void Update () {
+		gravity = rdd.gravityScale;
+	}
 
-	
-     
-       
-        if (fallDeath == true)
+
+		void Update () {
+
+		if (PlayerHealth.currentHealth <= -1)
+		{
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		}
+		//Horizontal camera transition
+		if (PlayerCameraManager.transistionHorizontal == false)
+		{
+			horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+		}
+		else if (PlayerCameraManager.transistionHorizontal == true)
+		{
+			if (horizontalMove <= 0)
+				horizontalMove = -16;
+			if (horizontalMove >= 0)
+				horizontalMove = 16;
+		}
+		//Vertical camera transition
+		if (PlayerCameraManager.transistionVertical == false)
+		{
+			rdd.drag = 0;
+			rdd.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
+		}
+		else if (PlayerCameraManager.transistionVertical == true)
+		{
+			Invoke("DelayVerticalTransition", 0f);
+		}
+		//
+
+		if (PlayerCameraManager.transistionHorizontal == false && !PauseMenu.GameIsPaused)
+		{
+			horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+		}
+		if (!PauseMenu.GameIsPaused)
+		animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+
+		{
+			if (Input.GetButtonDown("Jump"))
+			{
+
+				jump = true;
+				animator.SetBool("IsJumping", true);
+
+			}
+			if (rdd.velocity.y != 0)
+			{
+				animator.SetBool("IsJumping", true);
+			}
+			else
+			{
+				animator.SetBool("IsJumping", false);
+			}
+
+		}
+		if (fallDeath == true)
         {
             StartCoroutine(Fall());
             fallDeath = false;
@@ -47,11 +101,11 @@ public class PlayerMovement : PlayerMovementBasic {
 		if (Input.GetButtonDown("Crouch"))
 		{
 			crouch = true;
-		} else if (Input.GetButtonUp("Crouch"))
+		}
+		else if (Input.GetButtonUp("Crouch"))
 		{
 			crouch = false;
 		}
-
 	}
 	private void DelayVerticalTransition()
 	{
@@ -60,7 +114,7 @@ public class PlayerMovement : PlayerMovementBasic {
 	}
     public void OnLanding()
     {
-        rdd.gravityScale = 3f;
+        rdd.gravityScale = gravity;
         animator.SetBool("IsJumping", false);
         falling = false;
         animator.SetBool("IsFalling", false);

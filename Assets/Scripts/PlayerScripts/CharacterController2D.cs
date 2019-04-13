@@ -19,10 +19,12 @@ public class CharacterController2D : MonoBehaviour
     private Rigidbody2D m_Rigidbody2D;
     private bool m_FacingRight = true;  // For determining which way the player is currently facing.
     private bool canWallJump = false;
+	private bool test = false;
     private Vector3 m_Velocity = Vector3.zero;
     static public int jumpCount ;
     private Vector3 velocity;
-    private int jumpMax = 0;
+	private Vector3 playerForce;
+	private int jumpMax = 0;
     private PlayerPos playerPos;
     public Animator animator;
     public AudioSource jumpSound;
@@ -56,8 +58,8 @@ public class CharacterController2D : MonoBehaviour
         if (m_Grounded == false)
         {
             PlayerMovement.falling = true;
-            
-        }
+
+		}
         bool wasGrounded = m_Grounded;
         m_Grounded = false;
 
@@ -68,8 +70,12 @@ public class CharacterController2D : MonoBehaviour
         {
             if (colliders[i].gameObject != gameObject)
             {
-             
-                m_Grounded = true;
+				if (test)
+				{
+					FindObjectOfType<AudioManager>().Play("Grounded");
+					test = false;
+				}
+				m_Grounded = true;
                 jumpCount = 0;
 
                 if (!wasGrounded)
@@ -152,8 +158,9 @@ public void Move(float move, bool crouch, bool jump)
     {
         // Add a vertical force to the player.
         m_Grounded = false;
-        m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
-            jumpSound.Play();
+        playerForce = new Vector2(0f, m_JumpForce);
+		m_Rigidbody2D.AddForce(playerForce, ForceMode2D.Impulse);
+        jumpSound.Play();
     }
 }
     void OnCollisionEnter2D(Collision2D other){
@@ -164,14 +171,15 @@ public void Move(float move, bool crouch, bool jump)
                 {
                     if (point.normal.y >= 0.9f)
                     {
-                       
-                        m_Rigidbody2D.AddForce(new Vector2(0f, 400));
+					FindObjectOfType<AudioManager>().Play("Grounded");
+					m_Rigidbody2D.AddForce(new Vector2(0f, 500));
                         enemy.headDeath = true;
                     }
                     else
                     {
 					if (gameObject.tag == "PlayerHead")
 						{
+						FindObjectOfType<AudioManager>().Play("Grounded");
 						PlayerPosHead playerPosHead = GetComponent<PlayerPosHead>();
 						playerPosHead.isDead();
 						}
@@ -190,14 +198,15 @@ public void Move(float move, bool crouch, bool jump)
 			{
 				if (point.normal.y >= 0.9f)
 				{
-
-					m_Rigidbody2D.AddForce(new Vector2(0f, 400));
+					FindObjectOfType<AudioManager>().Play("Grounded");
+					m_Rigidbody2D.AddForce(new Vector2(0f, 500));
 					enemyNonVc.headDeath = true;
 				}
 				else
 				{
 					if (gameObject.tag == "PlayerHead")
 					{
+						FindObjectOfType<AudioManager>().Play("Grounded");
 						PlayerPosHead playerPosHead = GetComponent<PlayerPosHead>();
 						playerPosHead.isDead();
 					}
@@ -205,6 +214,7 @@ public void Move(float move, bool crouch, bool jump)
 					{
 						PlayerPos playerPos = GetComponent<PlayerPos>();
 						playerPos.isDead();
+						Debug.Log("SURE");
 					}
 				}
 			}

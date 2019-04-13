@@ -6,6 +6,7 @@ public class SwitchCamera : MonoBehaviour
 {
     private float time = 1;
     private bool stuff = true;
+	private float timez = 0;
 	// Use this for initialization
 	void Start()
 	{
@@ -21,14 +22,12 @@ public class SwitchCamera : MonoBehaviour
 
 			if (PlayerCameraManager.VC == true && stuff || PlayerCameraManager.VcVertical == true && stuff)
 			{
-				Debug.Log("tetetest");
 				CameraCompare.closestCamera.gameObject.transform.GetChild(0).gameObject.SetActive(false);
 				CameraCompare.closestVC.gameObject.transform.GetChild(0).gameObject.SetActive(true);
 				StartCoroutine(Transition());
 			}
 			if (PlayerCameraManager.VC == true && !stuff || PlayerCameraManager.VcVertical == true && !stuff)
 			{
-				Debug.Log("tetetest22");
 				CameraCompare.closestCamera.gameObject.transform.GetChild(0).gameObject.SetActive(true);
 				CameraCompare.closestVC.gameObject.transform.GetChild(0).gameObject.SetActive(false);
 				StartCoroutine(Transition2());

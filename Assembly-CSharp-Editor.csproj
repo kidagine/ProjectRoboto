@@ -53,20 +53,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Environment\Editor\ImageEffects\AntialiasingEditor.cs" />
-     <Compile Include="Assets\Environment\Editor\ImageEffects\BloomAndFlaresEditor.cs" />
-     <Compile Include="Assets\Environment\Editor\ImageEffects\BloomEditor.cs" />
-     <Compile Include="Assets\Environment\Editor\ImageEffects\CameraMotionBlurEditor.cs" />
-     <Compile Include="Assets\Environment\Editor\ImageEffects\ColorCorrectionCurvesEditor.cs" />
-     <Compile Include="Assets\Environment\Editor\ImageEffects\ColorCorrectionLookupEditor.cs" />
-     <Compile Include="Assets\Environment\Editor\ImageEffects\CreaseShadingEditor.cs" />
-     <Compile Include="Assets\Environment\Editor\ImageEffects\DepthOfFieldDeprecatedEditor.cs" />
-     <Compile Include="Assets\Environment\Editor\ImageEffects\DepthOfFieldEditor.cs" />
-     <Compile Include="Assets\Environment\Editor\ImageEffects\EdgeDetectionEditor.cs" />
-     <Compile Include="Assets\Environment\Editor\ImageEffects\NoiseAndGrainEditor.cs" />
-     <Compile Include="Assets\Environment\Editor\ImageEffects\SunShaftsEditor.cs" />
-     <Compile Include="Assets\Environment\Editor\ImageEffects\TonemappingEditor.cs" />
-     <Compile Include="Assets\Environment\Editor\ImageEffects\VignetteAndChromaticAberrationEditor.cs" />
+     <Compile Include="Assets\Assets\Editor\PackageExporter.cs" />
+     <Compile Include="Assets\Assets\Editor\VersionUpdater.cs" />
+     <Compile Include="Assets\Assets\InControl\Editor\InControlBuilder.cs" />
+     <Compile Include="Assets\Assets\InControl\Editor\InControlManagerEditor.cs" />
+     <Compile Include="Assets\Assets\InControl\Editor\InputManagerAssetGenerator.cs" />
+     <Compile Include="Assets\Assets\InControl\Editor\ProfileListGenerator.cs" />
+     <Compile Include="Assets\Assets\InControl\Editor\ReorderableList\GenericListAdaptor.cs" />
+     <Compile Include="Assets\Assets\InControl\Editor\ReorderableList\Internal\GUIHelper.cs" />
+     <Compile Include="Assets\Assets\InControl\Editor\ReorderableList\Internal\ReorderableListResources.cs" />
+     <Compile Include="Assets\Assets\InControl\Editor\ReorderableList\IReorderableListAdaptor.cs" />
+     <Compile Include="Assets\Assets\InControl\Editor\ReorderableList\ReorderableListControl.cs" />
+     <Compile Include="Assets\Assets\InControl\Editor\ReorderableList\ReorderableListFlags.cs" />
+     <Compile Include="Assets\Assets\InControl\Editor\ReorderableList\ReorderableListGUI.cs" />
+     <Compile Include="Assets\Assets\InControl\Editor\ReorderableList\SerializedPropertyAdaptor.cs" />
  <Reference Include="Cinemachine">
  <HintPath>C:/Users/Kid Agine/Desktop/Homunculus/2D-Movement-master/homunculus/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
  </Reference>
@@ -375,6 +375,8 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{6540BFB9-1654-2486-D330-3DB6C8815338}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{083AB2A6-C6B9-C333-62BC-4D42034A0715}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
   </ItemGroup>

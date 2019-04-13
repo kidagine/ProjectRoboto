@@ -60,6 +60,7 @@ public class EnemyNonVc : MonoBehaviour {
         theScale.x *= -1;
         transform.localScale = theScale;
     }
+
     public void TakeDamage(int damage){
         health -= damage;
     }
@@ -67,6 +68,7 @@ public class EnemyNonVc : MonoBehaviour {
     {
         Destroy(gameObject);
     }
+
 	public void KillEnemy()
 	{
 		enemyCollider.isTrigger = true;

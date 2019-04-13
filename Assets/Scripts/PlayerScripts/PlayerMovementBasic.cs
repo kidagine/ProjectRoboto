@@ -15,8 +15,9 @@ public class PlayerMovementBasic : MonoBehaviour {
     static public float runSpeedHidden;
     static public bool fallDeath = false;
     static public bool falling = false;
+	public static bool isDialogueActive = false;
 
-    private float horizontalMove = 0f;
+	private float horizontalMove = 0f;
     private float runningMove = 0f;
     private float jumpTimes = 2;
     private bool jump = false;
@@ -36,58 +37,78 @@ public class PlayerMovementBasic : MonoBehaviour {
  
     void Update () {
 
-		if (PlayerHealth.currentHealth <= -1)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
+
+			if (PlayerHealth.currentHealth <= -1)
+			{
+				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+			}
 		//Horizontal camera transition
-		if (PlayerCameraManager.transistionHorizontal == false)
+		if (PlayerCameraManager.transistionHorizontal == false && !isDialogueActive)
 		{
 			horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+			animator.SetBool("IsTalking",  false);
 		}
 		else if (PlayerCameraManager.transistionHorizontal == true)
 		{
 			if (horizontalMove <= 0)
-				horizontalMove = -15;
+				horizontalMove = -16;
 			if (horizontalMove >= 0)
-				horizontalMove = 15;
+				horizontalMove = 16;
 		}
-		//Vertical camera transition
-		if (PlayerCameraManager.transistionVertical == false)
+		else if (isDialogueActive)
 		{
-			rdd.drag = 0;
-			rdd.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
+			controller.enabled = false;
+			horizontalMove = 0;
+			animator.SetBool("IsTalking", true);
 		}
-		else if (PlayerCameraManager.transistionVertical == true)
-		{
-			Invoke("DelayVerticalTransition", 0f);
-		}
-		//
-            animator.SetFloat("Speed",Mathf.Abs(horizontalMove));
-  
-        {
-            if (Input.GetButtonDown("Jump")) 
-            {
-             
-                jump = true;     
-                animator.SetBool("IsJumping", true);
-         
-            }
-			if (rdd.velocity.y != 0)
+
+			//Vertical camera transition
+			if (PlayerCameraManager.transistionVertical == false)
 			{
-				animator.SetBool("IsJumping", true);
+				rdd.drag = 0;
+				rdd.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
 			}
-			else
+			else if (PlayerCameraManager.transistionVertical == true)
 			{
-				animator.SetBool("IsJumping", false);
+				Invoke("DelayVerticalTransition", 0f);
 			}
-                
-        }
+			//
+			animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+
+			{
+				if (Input.GetButtonDown("Jump"))
+				{
+
+					jump = true;
+					animator.SetBool("IsJumping", true);
+
+				}
+				if (rdd.velocity.y != 0)
+				{
+					animator.SetBool("IsJumping", true);
+				}
+				else
+				{
+					animator.SetBool("IsJumping", false);
+				}
+
+			}
+
+		
 
 	}
+
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.gameObject.CompareTag("CutsceneTrigger"))
+		{
+			isDialogueActive = true;
+		}
+	}
+		
 	private void DelayVerticalTransition()
 	{
-		rdd.drag = 20;
+		rdd.drag = 30;
 		rdd.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
 	}
     public void OnLanding()
